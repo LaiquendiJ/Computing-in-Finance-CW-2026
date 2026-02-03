@@ -5,7 +5,6 @@ void changeboard(int pos, char player){
     if (board[pos-1]!= 'O' && board[pos-1]!= 'X')
         {board[pos-1]=player;printBoard();}
     else printf("Position already occupied!\n");
-    
 }
 
 void printBoard(void){

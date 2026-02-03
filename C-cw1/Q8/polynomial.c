@@ -8,8 +8,29 @@ Polynomial* createTerm(float coef, int pow) {
     term->nex = NULL;
     return term;
 }
-Polynomial* readPoly(){
+Polynomial* readPoly(void){
+    Polynomial* head = NULL;
+    Polynomial* pointer = NULL;
+    int n, pow;
+    float coef;
 
+    printf("Input terms: ");
+    scanf("%d", &n);
+    for (int i=0;i<n;i++){
+        
+        scanf("%f %d", &coef,&pow);
+        
+        if (!head){
+            
+            head = createTerm(coef,pow);
+            pointer = head;
+     
+        }else{
+            pointer->nex = createTerm(coef,pow);
+            pointer = pointer->nex;
+        }
+    }
+    return head;
 
 }
 
@@ -34,10 +55,10 @@ Polynomial* add(Polynomial* poly1, Polynomial* poly2){
         poly1 = poly1->nex;
         poly2 = poly2->nex;
     }
-    if (!new_poly){
+    if (!new_poly && coef){
         new_poly = createTerm(coef,pow);
         p = new_poly;
-    }else{
+    }else if (coef){
         p->nex=createTerm(coef,pow);
         p = p->nex;
     }}
@@ -66,10 +87,10 @@ Polynomial* subtract(Polynomial* poly1, Polynomial* poly2){
         poly1 = poly1->nex;
         poly2 = poly2->nex;
     }
-    if (!new_poly){
+    if (!new_poly && coef){
         new_poly = createTerm(coef,pow);
         p = new_poly;
-    }else{
+    }else if (coef){
         p->nex=createTerm(coef,pow);
         p = p->nex;
     }}
@@ -107,4 +128,21 @@ float getValue(Polynomial*p, float x){
         res = res*x;
     }}  
     return res;
+}
+
+void printPoly(Polynomial* p){
+    printf("%.2fx^%d", p->coef,p->pow);
+    p = p->nex;
+    while (p)
+    {
+        if (p->pow==0){
+            if (p->coef<0)printf("%.2f",p->coef);
+            else printf("+%.2f",p->coef);
+            break;}
+        if (p->coef<0)printf("%.2fx^%d",p->coef,p->pow);
+        else printf("+%.2fx^%d",p->coef,p->pow);
+        
+        p = p->nex;
+    }
+    printf("\n");
 }

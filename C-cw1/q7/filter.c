@@ -1,4 +1,4 @@
-#include "head.h"
+#include "q7.h"
 
 void markNumbers(int* nums, int* marks, int N, int div){
     for (int i=div+1;i<N-1;i++){
