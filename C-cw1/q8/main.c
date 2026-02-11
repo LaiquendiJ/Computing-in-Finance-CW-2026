@@ -1,11 +1,11 @@
 #include "q8.h"
 
-int main(void){
-    
+int main(void)
+{
     printf("First polynomial\n");
-    Polynomial* a = readPoly();
+    Polynomial *a = readPoly();
     printf("Second polynomial\n");
-    Polynomial* b = readPoly();
+    Polynomial *b = readPoly();
 
     printf("The sum of two polynomials is:\n");
     printPoly(add(a, b));
@@ -16,5 +16,5 @@ int main(void){
     float x;
     printf("The input value of x: ");
     scanf("%f", &x);
-    printf("The value of the first polynomial with x=%f is %f",x,getValue(a,x));
+    printf("The value of the first polynomial with x=%f is %f", x, getValue(a, x));
 }

@@ -1,20 +1,30 @@
 #include "q7.h"
 
-void markNumbers2(int* nums, int* marks, int N, int div){
-    for (int i=div+1;i<N;i++){
-        if (marks[i] && nums[i]%nums[div]==0) marks[i]=0;
+void markNumbers2(int *nums, int *marks, int N, int div)
+{
+    for (int i = div + 1; i < N; i++)
+    {
+        if (marks[i] && nums[i] % nums[div] == 0)
+            marks[i] = 0;
     }
 }
-int getNextDiv2(int* nums, int* marks, int N, int div){
-    for (int i=div+1;i<N;i++){
-        if (marks[i]) return i;
+int getNextDiv2(int *nums, int *marks, int N, int div)
+{
+    for (int i = div + 1; i < N; i++)
+    {
+        if (marks[i])
+            return i;
     }
     return 0;
 }
-void printNumbers2(int* nums, int* marks, int N){
-    for (int i=0;i<N;i++){
-        if (marks[i]) {
+void printNumbers2(int *nums, int *marks, int N)
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (marks[i])
+        {
             printf("%d", nums[i]);
-            printf(" ");}
+            printf(" ");
+        }
     }
 }
