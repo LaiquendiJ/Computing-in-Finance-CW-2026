@@ -8,6 +8,8 @@ int checkFraction(int a, int b)
     int b1 = (b - b0) / 10;
     if (a0 == b0 && a1 == b1)
         return 0;
+    else if (a0 == b0 && a0 == 0)
+        return 1;
     else if (!a1 || !b1)
         return 0;
     else if (a0 == b1 && a1 * b == a * b0)

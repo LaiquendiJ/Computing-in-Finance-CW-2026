@@ -9,6 +9,54 @@ Polynomial *createTerm(double coef, int pow)
     return term;
 }
 
+/* Insert term in descending exponent order */
+Polynomial *addTerm(Polynomial *p, double coef, int pow)
+{
+    if (coef == 0)
+        return p;
+    if (p == NULL)
+    {
+        return createTerm(coef, pow);
+    }
+    Polynomial *head = p;
+    Polynomial *pre = NULL;
+
+    if (pow > p->pow)
+    {
+        Polynomial *res = createTerm(coef, pow);
+        res->nex = p;
+        return res;
+    }
+    while (p)
+    {
+        if (pow == p->pow)
+        {
+            p->coef += coef;
+            if (p->coef == 0)
+            {
+                if (pre)
+                    pre->nex = p->nex;
+                else
+                    head = p->nex;
+                free(p);
+            }
+            return head;
+        }
+        else if (pow > p->pow)
+        {
+            Polynomial *res = createTerm(coef, pow);
+            res->nex = p;
+            pre->nex = res;
+            return head;
+        }
+        pre = p;
+        p = p->nex;
+    }
+    pre->nex = createTerm(coef, pow);
+    return head;
+}
+
+/* Read polynomials terms from user input and return the polynomial linked list */
 Polynomial *readPoly(void)
 {
     Polynomial *head = NULL;
@@ -16,25 +64,18 @@ Polynomial *readPoly(void)
     int n, pow;
     double coef;
 
-    printf("Input terms: ");
+    printf("Number of input terms: ");
     scanf("%d", &n);
     for (int i = 0; i < n; i++)
     {
+        printf("Coefficient and power: ");
         scanf("%lf %d", &coef, &pow);
-        if (!head)
-        {
-            head = createTerm(coef, pow);
-            pointer = head;
-        }
-        else
-        {
-            pointer->nex = createTerm(coef, pow);
-            pointer = pointer->nex;
-        }
+        head = addTerm(head, coef, pow);
     }
     return head;
 }
 
+/* Add two polynomials linked list and return the result as a new linked list */
 Polynomial *add(Polynomial *poly1, Polynomial *poly2)
 {
     Polynomial *new_poly = NULL;
@@ -77,6 +118,7 @@ Polynomial *add(Polynomial *poly1, Polynomial *poly2)
     return new_poly;
 }
 
+/* Subtract two polynomials linked list and return the result as a new linked list */
 Polynomial *subtract(Polynomial *poly1, Polynomial *poly2)
 {
     Polynomial *new_poly = NULL;
@@ -118,7 +160,7 @@ Polynomial *subtract(Polynomial *poly1, Polynomial *poly2)
     }
     return new_poly;
 }
-
+/* Multiply two polynomials linked list and return the result as a new linked list */
 Polynomial *multiply(Polynomial *poly1, Polynomial *poly2)
 {
     if (!poly2)
@@ -138,8 +180,8 @@ Polynomial *multiply(Polynomial *poly1, Polynomial *poly2)
     poly2 = poly2->nex;
     return add(multiply(poly1, poly2), new_poly);
 }
-
-float getValue(Polynomial *p, double x)
+/* Evaluate the polynomial linked list at a give value of x */
+double getValue(Polynomial *p, double x)
 {
     if (!p)
         return 0.0;
@@ -159,10 +201,10 @@ float getValue(Polynomial *p, double x)
     }
     return res;
 }
-
+/* Print the polynomial linked list */
 void printPoly(Polynomial *p)
 {
-    printf("%.2fx^%d", p->coef, p->pow);
+    printf("%fx^%d", p->coef, p->pow);
     p = p->nex;
     while (p)
     {

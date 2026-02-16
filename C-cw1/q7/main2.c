@@ -30,6 +30,6 @@ int main(void)
         printf(" ");
     }
     else
-        return;
-    printNumbers2(nums, marks, size);
+        return EXIT_SUCCESS;
+    printNumbers(nums, marks, size);
 }

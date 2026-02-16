@@ -17,14 +17,3 @@ int getNextDiv2(int *nums, int *marks, int N, int div)
     }
     return 0;
 }
-void printNumbers2(int *nums, int *marks, int N)
-{
-    for (int i = 0; i < N; i++)
-    {
-        if (marks[i])
-        {
-            printf("%d", nums[i]);
-            printf(" ");
-        }
-    }
-}

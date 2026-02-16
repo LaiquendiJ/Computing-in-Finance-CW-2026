@@ -17,4 +17,5 @@ int main(void)
     printf("The input value of x: ");
     scanf("%f", &x);
     printf("The value of the first polynomial with x=%f is %f", x, getValue(a, x));
+    
 }

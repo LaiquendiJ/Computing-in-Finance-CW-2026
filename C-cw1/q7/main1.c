@@ -18,5 +18,5 @@ int main(void)
         markNumbers(nums, marks, n, div);
         div = getNextDiv(nums, marks, n, div);
     }
-    printNumbers(nums, marks, n);
+    printNumbers(nums, marks, n-1);
 }

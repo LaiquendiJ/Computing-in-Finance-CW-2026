@@ -1,3 +1,6 @@
+/*
+Write a program which reads in two characters and outputs them in reverse order.
+*/
 #include <math.h>
 #include <stdio.h>
 
