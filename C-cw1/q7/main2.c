@@ -1,5 +1,5 @@
 #include "q7.h"
-
+/*
 int main(void)
 {
     int n;
@@ -32,4 +32,4 @@ int main(void)
     else
         return EXIT_SUCCESS;
     printNumbers(nums, marks, size);
-}
+}*/
