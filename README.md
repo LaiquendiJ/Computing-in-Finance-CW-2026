@@ -1,6 +1,7 @@
 # Computing-in-Finance-CW-2026
 
 Team members: 
+
 Harry Qiao (02057393)
 Email: harry.qiao25@imperial.ac.uk
 
