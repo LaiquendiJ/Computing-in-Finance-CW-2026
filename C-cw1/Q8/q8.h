@@ -22,4 +22,6 @@ Polynomial *multiply(Polynomial *poly1, Polynomial *poly2);
 double getValue(Polynomial *p, double x);
 void printPoly(Polynomial *p);
 
+void freePoly(Polynomial *head);
+
 #endif // Q8_H

@@ -170,22 +170,28 @@ Polynomial *subtract(Polynomial *poly1, Polynomial *poly2)
 // Multiply two polynomials linked list and return the result as a new linked list.
 Polynomial *multiply(Polynomial *poly1, Polynomial *poly2)
 {
-    if (!poly2)
+    if (poly1 == NULL || poly2 == NULL)
         return NULL;
+
     Polynomial *p1 = poly1;
     Polynomial *new_poly = createTerm(poly2->coef * poly1->coef, poly1->pow + poly2->pow);
     Polynomial *p = new_poly;
     p1 = p1->nex;
-    double coef;
-    int pow;
+
     while (p1)
     {
         p->nex = createTerm(poly2->coef * p1->coef, p1->pow + poly2->pow);
         p = p->nex;
         p1 = p1->nex;
     }
-    poly2 = poly2->nex;
-    return add(multiply(poly1, poly2), new_poly);
+
+    Polynomial *remaining_recursive_result = multiply(poly1, poly2->nex);
+    Polynomial *final_result = add(remaining_recursive_result, new_poly);
+
+
+    freePoly(remaining_recursive_result);
+    freePoly(new_poly);
+    return final_result;
 }
 
 // Evaluate the polynomial linked list at a given value of x and return the result as a double.
@@ -233,4 +239,13 @@ void printPoly(Polynomial *p)
         p = p->nex;
     }
     printf("\n");
+}
+
+void freePoly(Polynomial *head) {
+    Polynomial *temp;
+    while (head != NULL) {
+        temp = head->nex; 
+        free(head);       
+        head = temp;     
+    }
 }
