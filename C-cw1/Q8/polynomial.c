@@ -1,5 +1,11 @@
+// Purpose: Implements polynomial operations using a linked list.
+// Functions: creation, addition, subtraction, multiplication, evaluation, and printing.
+
+#include <stdio.h>
+#include <stdlib.h>
 #include "q8.h"
 
+// Create a new term with given coefficient and power, and return the pointer to the term.
 Polynomial *createTerm(double coef, int pow)
 {
     Polynomial *term = (Polynomial *)malloc(sizeof(Polynomial));
@@ -9,7 +15,8 @@ Polynomial *createTerm(double coef, int pow)
     return term;
 }
 
-/* Insert term in descending exponent order */
+// Insert term in descending exponent order, and combine like terms if necessary. 
+// Return the head of the polynomial linked list.
 Polynomial *addTerm(Polynomial *p, double coef, int pow)
 {
     if (coef == 0)
@@ -56,7 +63,7 @@ Polynomial *addTerm(Polynomial *p, double coef, int pow)
     return head;
 }
 
-/* Read polynomials terms from user input and return the polynomial linked list */
+// Read polynomials terms from user input and return the polynomial linked list.
 Polynomial *readPoly(void)
 {
     Polynomial *head = NULL;
@@ -75,7 +82,7 @@ Polynomial *readPoly(void)
     return head;
 }
 
-/* Add two polynomials linked list and return the result as a new linked list */
+// Add two polynomials linked list and return the result as a new linked list.
 Polynomial *add(Polynomial *poly1, Polynomial *poly2)
 {
     Polynomial *new_poly = NULL;
@@ -118,7 +125,7 @@ Polynomial *add(Polynomial *poly1, Polynomial *poly2)
     return new_poly;
 }
 
-/* Subtract two polynomials linked list and return the result as a new linked list */
+// Subtract two polynomials linked list and return the result as a new linked list.
 Polynomial *subtract(Polynomial *poly1, Polynomial *poly2)
 {
     Polynomial *new_poly = NULL;
@@ -160,7 +167,7 @@ Polynomial *subtract(Polynomial *poly1, Polynomial *poly2)
     }
     return new_poly;
 }
-/* Multiply two polynomials linked list and return the result as a new linked list */
+// Multiply two polynomials linked list and return the result as a new linked list.
 Polynomial *multiply(Polynomial *poly1, Polynomial *poly2)
 {
     if (!poly2)
@@ -180,7 +187,8 @@ Polynomial *multiply(Polynomial *poly1, Polynomial *poly2)
     poly2 = poly2->nex;
     return add(multiply(poly1, poly2), new_poly);
 }
-/* Evaluate the polynomial linked list at a give value of x */
+
+// Evaluate the polynomial linked list at a given value of x and return the result as a double.
 double getValue(Polynomial *p, double x)
 {
     if (!p)
@@ -201,7 +209,8 @@ double getValue(Polynomial *p, double x)
     }
     return res;
 }
-/* Print the polynomial linked list */
+
+// Print the polynomial linked list.
 void printPoly(Polynomial *p)
 {
     printf("%fx^%d", p->coef, p->pow);
@@ -213,13 +222,13 @@ void printPoly(Polynomial *p)
             if (p->coef < 0)
                 printf("%f", p->coef);
             else
-                printf("+%f", p->coef);
+                printf(" + %f", p->coef);
             break;
         }
         if (p->coef < 0)
             printf("%fx^%d", p->coef, p->pow);
         else
-            printf("+%fx^%d", p->coef, p->pow);
+            printf(" + %fx^%d", p->coef, p->pow);
 
         p = p->nex;
     }
