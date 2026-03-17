@@ -1,0 +1,143 @@
+### Question 1 ###
+
+The output produced by this program is: 4294967271 
+
+According to the 'usual arithmetic conversions', the arithmetic
+between an unsigned int and an int while the and the maximum value representable by unsigned int is greater 
+than or equal to the maximum value representable by int, the int operand is converted to unsigned int. 
+The result would also be the type of unsigned int. Since unsigned int cannot be negative, so the result(res) 
+the result has the same value modulo 2^32. Since 25-50=-25, so res = 2^32-25 = 4294967271.
+
+
+
+### Question 2 ###
+
+The output produced by this program is:
+
+i: 7
+j: 5
+k: 7
+
+Because we first define i to be 5. Next, we initialize the value of j by using 'int j = i++'.
+This means that the current value of i (which is 5) is first assigned to j, and then i is 
+increased by 1. As a result, i = 6 and j = 5. 
+
+Then, we we initialize the value of j by using 'int k = ++i'. This means we first increase 
+the value of i by 1, making i equal to 7, and then the new value of i is assigned to k. 
+Therefore, the final values are:
+i = 7, j = 5, k = 7
+
+
+
+### Question 3 ###
+The output produced by this program is:
+
+main : a: 3, b: 5
+swap1 : a: 5, b: 3
+main : a: 3, b: 5
+swap2 : *a: 5, *b: 3
+main : a: 5, b: 3
+swap3 : a: 3, b: 5
+main : a: 3, b: 5
+
+The first line shows the original values of a and b produced in the main() function, 
+where a is 3 and b is 5.
+
+Next, the function swap1() is called. The parameters are declared as 'int a, int b', 
+which means the function receives copies of the values of a and b. 
+In swap1, we use a temporary variable temp to store the value of a. Then the value 
+of b is assigned to a, and next the value stored in temp is assigned to b. 
+As a result, we swap the local copies of the a and b. The output produced
+inside swap1() shows a = 5 and b = 3.
+
+Since we only changed the copy of a and b inside swap1(), this would not affect the 
+original variables in main(). So back to main(), we still have a = 3, b = 5.
+
+Next, the function swap2() is called. Its parameters are declared as 'int* a and int* b', 
+and the function is invoked using swap2(&a, &b). This means that the function receives 
+the addresses of the variables a and b. 
+In swap2(), a temporary variable temp is used to store the value pointed to by a. The value 
+pointed to by b is then assigned to the location pointed to by a, and finally the value 
+stored in temp is assigned to the location pointed to by b. 
+As a result, we swap the values stored at the memory locations of a and b. The output
+produced inside swap2() shows *a = 5 and *b = 3.
+
+Since we changed values stored at the memory locations of a and b inside swap1(), this 
+would also changes the original variables in main(). 
+So back to main(), we have a = 5, b = 3.
+
+Next, the function swap3() is called. Its parameters are declared as 'int &a and int &b', 
+This means that the function receives references to the original variabless a and b. 
+In swap3(), we use a temporary variable temp to store the value of a. Then the value 
+of b is assigned to a, and next the value stored in temp is assigned to b. 
+As a result, we swap the original values of a and b. The output produced inside swap3() 
+shows a = 3 and b = 5.
+
+Since we changed the original values of a and b inside swap3(), this would also affect 
+the variable values in main(). So back to main(), we have a = 3, b = 5.
+
+
+
+### Question 4 ###
+The output produced by this program is:
+
+constructor called , x = 3
+constructor called , x = 5
+copy constructor called , x = 3
+assignment operator called , x was 3 and became 5
+assignment operator called , x was 3 and became 5
+destructor called , x = 5
+destructor called , x = 5
+destructor called , x = 5
+
+For the first two lines, the constructor of MyClass is called with an int value, so the constructor 
+MyClass(int x) : x(x) is invoked, and the code inside this constructor is executed.
+
+For the third line, the constructor of MyClass is called with a value of type Myclass, so the constructor 
+MyClass(const MyClass &other) : x(other.x) is invoked, and the code inside this constructor is executed.
+Accoriding to the code inside the function, we now have c.x = a.x = 3.
+
+The following lines utilize the overloaded assignment operator. When c = b and a = b are executed, the 
+operator= function is invoked, performing a member-wise assignment where the value of other.x is copied 
+to the current instance. Due to the right-associativity of the operator, c.x is assigned to b.x, and also,
+b.x is assigned to a.x. All three instances now hold an x value of 5.
+
+Upon the completion of main(), he automatic variables are cleaned up. The ~MyClass() destructor is invoked 
+for each object in the reverse order of their construction.
+
+
+
+### Question 5 ###
+The output produced by this program is:
+
+I am const , x = 1
+I am not const , x = 2
+I am not const , x = 3
+I am const , x = 4
+I am const , x = 1
+I am not const , x = 2
+
+The get() function is called for both the const object a and non-const object b. The 
+corresponding version of get() is triggered for each instance, printing 1 and 2.
+
+Pointers c (non-const) and d (const-pointed) use the -> operator to call get(). The 
+compiler selects the appropriate function based on whether the pointed-to object is 
+const, printing the values 3 and 4 respectively.
+
+Two references are defined: e (const) and f (non-const) are bound to a and b. Calling 
+.get() triggers the corresponding function overload for each, based on the reference 
+type, printing the stored values 1 and 2 respectively.
+
+Delete c and delete d are called at the end of the program. This triggers the destructors 
+for the heap-resident MyClass instances and deallocates the associated memory blocks.
+
+
+
+### Question 6 ###
+
+Remarks: 
+
+The main1.cpp works on its own. It is exactly what the question asked for.
+
+The main2.cpp needs to be compiled with vector.cpp. The size of the vector int nn is 
+changed to std::size_t nn. The seperate files + unsigned vector sizes is a cherry on top.
